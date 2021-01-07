@@ -42,10 +42,9 @@ class Form{
     this.input = createInput("Name")
     this.button = createButton('Play')
     this.greeting = createElement('h3')
-    this.genderM = createRadio();
-    this.genderM.option('male', 1);
-    this.genderF = createRadio();
-    this.genderF.option('female', 2);
+    this.genderMButton = createButton('male');
+    this.genderFButton = createButton('female');
+    //this.title = createElement('h1');
   
   }
 
@@ -53,25 +52,55 @@ class Form{
     this.input.hide();
     this.button.hide();
     this.greeting.hide();
-    this.genderM.hide();
-    this.genderF.hide();
+    this.genderMButton.hide();
+    this.genderFButton.hide();
+    
   }
 
 display(){
   var title = createElement('h1');
   title.html("Escape the Nightville Mansion")
 
+
   this.input.position(130, 160);
   this.button.position(250,200);
 
   stroke("white");
-  this.genderM.position(350, 200);
-  this.genderF.position(350, 300);
+  this.genderMButton.position(350, 200);
+  this.genderFButton.position(350, 300);
   title.position(130, 0);
+
+  this.genderMButton.mousePressed(()=>{
+    console.log(this.genderMButton);
+
+    gender = "male";
+
+
+    this.genderMButton.hide();
+    this.genderFButton.hide();
+
+    playerM = createSprite(200,200);
+    playerM.addImage("boyForward.jpg", playerMImage)
+    playerM.scale = 0.03;
+  });
+
+this.genderFButton.mousePressed(()=>{
+  gender = "female";
+
+  this.genderMButton.hide();
+  this.genderFButton.hide();
+  //title.hide();
+
+  playerF = createSprite(200,200);
+  playerF.addImage("girlForward.jpg", playerFImage)
+  playerF.scale = 0.3;
+
+});
 
   this.button.mousePressed(()=>{
     this.input.hide();
     this.button.hide();
+    title.hide();
 
     var name = this.input.value();
 
