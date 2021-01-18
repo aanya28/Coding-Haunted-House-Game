@@ -37,6 +37,7 @@ var playerM, playerF, playerFRight, playerMRight;
 var room1, room2, room3;
 var gender;
 var zombie, zombieImage, zombieGroup;
+var lever, leverImage
 
 var score = 0;
 
@@ -46,7 +47,7 @@ function preload(){
   playerMImage = loadImage("images/boyForward.jpg");
   playerMRight = loadImage("images/boyRight.jpg");
 
-  playerFImage = loadImage("images/girlForward.jpg");
+  playerFImage = loadImage("images/girlForward.png");
   playerFRight = loadImage("images/girlRight.jpg");
 
   room1 = loadImage("images/room1.jpg");
@@ -54,6 +55,8 @@ function preload(){
   room3 = loadImage("images/room3.jpg");
 
   zombieImage = loadImage("images/zombieLeft.jpg");
+
+  leverImage = loadImage("images/lever.jpg");
 
 }
 
@@ -90,6 +93,7 @@ function draw(){
     form.hide();
     background(room1);
 
+    //console.log(playerM.y);
     console.log(gender);
 
     if(keyDown(RIGHT_ARROW) && gender === "male"){
@@ -100,9 +104,9 @@ function draw(){
       playerM.x = playerM.x -10;
     }
 
-    if(keyDown(DOWN_ARROW) && gender === "male"){
+    /*if(keyDown(DOWN_ARROW) && gender === "male"){
       playerM.y = playerM.y +10;
-    }
+    }*/
 
     if(keyDown(RIGHT_ARROW) && gender === "female"){
       playerF.x = playerF.x +10;
@@ -111,6 +115,19 @@ function draw(){
     if(keyDown(LEFT_ARROW) && gender === "female"){
       playerF.x = playerF.x -10;
     }
+
+
+
+    if(score === 20){
+      //background(room2)
+      lever = createSprite(400,400,20,200);
+      lever.addImage(leverImage, "lever.jpg");
+      lever.scale = 0.04;
+
+      text('find the hidden lever!', 20, 20);
+    }
+
+    
 
     /*if(mousePressedOver(playerM)){
       console.log("hi");
@@ -129,12 +146,19 @@ function draw(){
      gameState = "end";
    }
    
+    spawnBullet();
     drawSprites();
 
-    if(mouseDown("leftButton")){
+    /*if(mouseDown("leftButton") && mousePressedOver(zombie)){
+      zombieGroup.destroyEach();
+      //removeZombie();
+      score = score +1;
+    }*/
+
+    /*if(mousePressed(zombie)){
       zombieGroup.destroyEach();
       score = score +1;
-    }
+    }*/
 
   }
   
@@ -150,10 +174,10 @@ function draw(){
 }
 
 function spawnZombies() {
-  if (frameCount % 180 === 0) {
-    zombie = createSprite(200,200,40,10);
-    zombie.y = 400;
-    zombie.x = Math.round(random(0,600));
+  if (frameCount % 250 === 0) {
+    zombie = createSprite(200,500);
+    zombie.y = 500;
+    zombie.x = Math.round(random(10,590));
     zombie.addImage(zombieImage, "zombieLeft.jpg");
     zombie.scale = 0.3;
     //zombie.velocityX = -5;
@@ -161,9 +185,44 @@ function spawnZombies() {
     
     zombieGroup.add(zombie);
 
+    /*if(mouseDown("leftButton") && mousePressedOver(zombie)){
+      zombieGroup.destroyEach();
+      //removeZombie();
+      score = score +1;
+    }*/
+
     /*if(mousePressedOver(zombie)){
       console.log("hello")
       zombie.destroy();
     }*/
+  }
+}
+
+/*function removeZombie(){
+  zombie.remove();
+}*/
+
+function spawnBullet(){
+  
+  if(keyDown("a")){
+    var bullet = createSprite(20,20,20,20);
+   
+    bullet.y = playerM.y;
+    bullet.x = playerM.x;
+
+    bullet.shapeColor = "red";
+    console.log('left');
+    bullet.velocityX = -3;
+  }
+
+  if(keyDown("d")){
+    var bullet = createSprite(20,20,20,20);
+
+    bullet.y = playerM.y;
+    bullet.x = playerM.x;
+
+    bullet.shapeColor = "red";
+    console.log('right');
+    bullet.velocityX = 3;
   }
 }
