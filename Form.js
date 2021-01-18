@@ -44,7 +44,6 @@ class Form{
     this.greeting = createElement('h3')
     this.genderMButton = createButton('male');
     this.genderFButton = createButton('female');
-    //this.title = createElement('h1');
   
   }
 
@@ -79,9 +78,9 @@ display(){
     this.genderMButton.hide();
     this.genderFButton.hide();
 
-    playerM = createSprite(200,200);
+    playerM = createSprite(200,500);
     playerM.addImage("boyForward.jpg", playerMImage)
-    playerM.scale = 0.03;
+    playerM.scale = 0.3;
   });
 
 this.genderFButton.mousePressed(()=>{
@@ -89,10 +88,9 @@ this.genderFButton.mousePressed(()=>{
 
   this.genderMButton.hide();
   this.genderFButton.hide();
-  //title.hide();
 
-  playerF = createSprite(200,200);
-  playerF.addImage("girlForward.jpg", playerFImage)
+  playerF = createSprite(200,500);
+  playerF.addImage("girlForward.png", playerFImage)
   playerF.scale = 0.3;
 
 });
@@ -100,7 +98,7 @@ this.genderFButton.mousePressed(()=>{
   this.button.mousePressed(()=>{
     this.input.hide();
     this.button.hide();
-    title.hide();
+    
 
     var name = this.input.value();
 
