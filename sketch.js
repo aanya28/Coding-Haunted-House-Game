@@ -38,6 +38,7 @@ var room1, room2, room3;
 var gender;
 var zombie, zombieImage, zombieGroup;
 var lever, leverImage
+var bullet;
 
 var score = 0;
 
@@ -116,7 +117,7 @@ function draw(){
       playerF.x = playerF.x -10;
     }
 
-
+    
 
     if(score === 20){
       //background(room2)
@@ -128,10 +129,6 @@ function draw(){
     }
 
     
-
-    /*if(mousePressedOver(playerM)){
-      console.log("hi");
-    }*/
     
 
     spawnZombies();
@@ -140,13 +137,13 @@ function draw(){
     lives = lives -1;
     zombieGroup.destroyEach();
    }
+
     
    if(lives ===0){
 
      gameState = "end";
    }
-   
-    spawnBullet();
+  
     drawSprites();
 
     /*if(mouseDown("leftButton") && mousePressedOver(zombie)){
@@ -174,55 +171,23 @@ function draw(){
 }
 
 function spawnZombies() {
-  if (frameCount % 250 === 0) {
+  if (frameCount % 100 === 0) {
     zombie = createSprite(200,500);
     zombie.y = 500;
     zombie.x = Math.round(random(10,590));
     zombie.addImage(zombieImage, "zombieLeft.jpg");
     zombie.scale = 0.3;
     //zombie.velocityX = -5;
-    
+   
     
     zombieGroup.add(zombie);
-
-    /*if(mouseDown("leftButton") && mousePressedOver(zombie)){
-      zombieGroup.destroyEach();
-      //removeZombie();
-      score = score +1;
-    }*/
-
-    /*if(mousePressedOver(zombie)){
-      console.log("hello")
-      zombie.destroy();
-    }*/
+   zombie.lifetime=500
+  }
+  if(mousePressedOver(zombie)){
+    console.log("hello")
+    score++
+    zombie.destroy()
+    
   }
 }
 
-/*function removeZombie(){
-  zombie.remove();
-}*/
-
-function spawnBullet(){
-  
-  if(keyDown("a")){
-    var bullet = createSprite(20,20,20,20);
-   
-    bullet.y = playerM.y;
-    bullet.x = playerM.x;
-
-    bullet.shapeColor = "red";
-    console.log('left');
-    bullet.velocityX = -3;
-  }
-
-  if(keyDown("d")){
-    var bullet = createSprite(20,20,20,20);
-
-    bullet.y = playerM.y;
-    bullet.x = playerM.x;
-
-    bullet.shapeColor = "red";
-    console.log('right');
-    bullet.velocityX = 3;
-  }
-}
