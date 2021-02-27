@@ -34,7 +34,7 @@
   }
 }*/
 
-class Player{
+/*class Player{
   constructor(){
     this.name = null
     this.x = x;
@@ -47,5 +47,5 @@ class Player{
   display(){
     
   }
-}
+}*/
 

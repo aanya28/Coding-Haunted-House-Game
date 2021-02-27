@@ -37,7 +37,7 @@ var playerM, playerF, playerFRight, playerMRight;
 var room1, room2, room3;
 var gender;
 var zombie, zombieImage, zombieGroup;
-var lever, leverImage
+var button, buttonImage;
 var bullet;
 
 var score = 0;
@@ -57,7 +57,7 @@ function preload(){
 
   zombieImage = loadImage("images/zombieLeft.jpg");
 
-  leverImage = loadImage("images/lever.jpg");
+  buttonImage = loadImage("images/button.jpg");
 
 }
 
@@ -97,7 +97,7 @@ function draw(){
     //console.log(playerM.y);
     console.log(gender);
 
-    if(keyDown(RIGHT_ARROW) && gender === "male"){
+    /*if(keyDown(RIGHT_ARROW) && gender === "male"){
       playerM.x = playerM.x +10;
     }
 
@@ -105,9 +105,6 @@ function draw(){
       playerM.x = playerM.x -10;
     }
 
-    /*if(keyDown(DOWN_ARROW) && gender === "male"){
-      playerM.y = playerM.y +10;
-    }*/
 
     if(keyDown(RIGHT_ARROW) && gender === "female"){
       playerF.x = playerF.x +10;
@@ -115,20 +112,23 @@ function draw(){
 
     if(keyDown(LEFT_ARROW) && gender === "female"){
       playerF.x = playerF.x -10;
-    }
+    }*/
 
     
 
     if(score === 20){
-      //background(room2)
-      lever = createSprite(400,400,20,200);
-      lever.addImage(leverImage, "lever.jpg");
-      lever.scale = 0.04;
+      button = createSprite(400,400,20,200);
+      button.addImage(buttonImage, "button.jpg");
+      button.scale = 0.03;
 
-      text('find the hidden lever!', 20, 20);
+      textSize(20);
+      text('find the hidden button!', 20, 20);
     }
 
-    
+    if(mousePressedOver(button)){
+      gamestate = "play2";
+      button.destroy();
+    }
     
 
     spawnZombies();
@@ -142,6 +142,20 @@ function draw(){
    if(lives ===0){
 
      gameState = "end";
+   }
+
+   if(gameState === "play2"){
+     bakcground(room2);
+    
+
+
+
+     spawnZombies();
+
+     if(playerM.isTouching(zombieGroup)){
+      lives = lives -1;
+      zombieGroup.destroyEach();
+     }
    }
   
     drawSprites();
@@ -174,20 +188,18 @@ function spawnZombies() {
   if (frameCount % 100 === 0) {
     zombie = createSprite(200,500);
     zombie.y = 500;
-    zombie.x = Math.round(random(10,590));
+    zombie.x = Math.round(random(150,590));
     zombie.addImage(zombieImage, "zombieLeft.jpg");
     zombie.scale = 0.3;
-    //zombie.velocityX = -5;
+    zombie.velocityX = -5;
    
     
     zombieGroup.add(zombie);
    zombie.lifetime=500
   }
   if(mousePressedOver(zombie)){
-    console.log("hello")
-    score++
+    score = score +1;
     zombie.destroy()
-    
   }
 }
 

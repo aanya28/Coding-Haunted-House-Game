@@ -78,7 +78,7 @@ display(){
     this.genderMButton.hide();
     this.genderFButton.hide();
 
-    playerM = createSprite(200,500);
+    playerM = createSprite(50,500);
     playerM.addImage("boyForward.jpg", playerMImage)
     playerM.scale = 0.3;
   });
@@ -89,7 +89,7 @@ this.genderFButton.mousePressed(()=>{
   this.genderMButton.hide();
   this.genderFButton.hide();
 
-  playerF = createSprite(200,500);
+  playerF = createSprite(50,500);
   playerF.addImage("girlForward.png", playerFImage)
   playerF.scale = 0.3;
 
